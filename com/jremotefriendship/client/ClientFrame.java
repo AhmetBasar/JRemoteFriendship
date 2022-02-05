@@ -1,8 +1,11 @@
 package com.jremotefriendship.client;
 
+import java.awt.KeyEventDispatcher;
+import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -38,6 +41,28 @@ public class ClientFrame {
 		mainFrame.setLocation(30, 30);
 		mainFrame.setSize(width, heigth);
 		mainFrame.setResizable(false);
+		
+		KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
+		manager.addKeyEventDispatcher(new KeyEventDispatcher() {
+			@Override
+			public boolean dispatchKeyEvent(KeyEvent e) {
+				if (e.getID() == KeyEvent.KEY_PRESSED) {
+					try {
+						RMIClient.keyPress(e.getKeyCode());
+					} catch (RemoteException e1) {
+						e1.printStackTrace();
+					}
+				} else if (e.getID() == KeyEvent.KEY_RELEASED) {
+					try {
+						RMIClient.keyRelease(e.getKeyCode());
+					} catch (RemoteException e1) {
+						e1.printStackTrace();
+					}
+				} else if (e.getID() == KeyEvent.KEY_TYPED) {
+				}
+				return false;
+			}
+		});
 		
 		final JPanel panel = new JPanel();
 		panel.setLayout(null);
