@@ -28,4 +28,14 @@ class RMIServer extends UnicastRemoteObject implements IJRemote {
 		Robot.doMouseClick(buttonMask);
 	}
 
+	@Override
+	public void keyPress(int keycode) throws RemoteException {
+		Robot.keyPress(keycode);
+	}
+
+	@Override
+	public void keyRelease(int keycode) throws RemoteException {
+		Robot.keyRelase(keycode);
+	}
+
 }
