@@ -31,6 +31,14 @@ public class RMIClient {
 	public static void mouseClick(int buttonMask) throws RemoteException {
 		server.mouseClick(buttonMask);
 	}
+	
+	public static void keyPress(int keycode) throws RemoteException {
+		server.keyPress(keycode);
+	}
+	
+	public static void keyRelease(int keycode) throws RemoteException {
+		server.keyRelease(keycode);
+	}
 
 	public static BufferedImage getScreenShot() throws RemoteException {
 		ByteArrayInputStream is = null;
