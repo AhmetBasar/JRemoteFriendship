@@ -1,13 +1,10 @@
 package com.jremotefriendship.server;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 import com.jremotefriendship.util.IJRemote;
 import com.jremotefriendship.util.Robot;
-import com.jremotefriendship.util.Utility;
 
 class RMIServer extends UnicastRemoteObject implements IJRemote {
 
@@ -23,19 +20,7 @@ class RMIServer extends UnicastRemoteObject implements IJRemote {
 	}
 	
 	public byte[] getScreenShot() throws RemoteException {
-		ByteArrayOutputStream baos = null;
-		BufferedImage img = null;
-		try {
-			baos = new ByteArrayOutputStream();
-			img = Robot.takeScreenShot();
-			javax.imageio.ImageIO.write(img, "jpg", baos);
-			return baos.toByteArray();
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		} finally {
-			Utility.closeQuietly(baos);
-		}
+		return ScreenShotGenerator.getInstance().getScreenShot();
 	}
 
 	@Override
