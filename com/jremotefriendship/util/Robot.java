@@ -68,4 +68,12 @@ public class Robot {
 		robot.mouseRelease(mask);
 	}
 	
+	public static void keyPress(int keycode) {
+		robot.keyPress(keycode);
+	}
+	
+	public static void keyRelase(int keycode) {
+		robot.keyRelease(keycode);
+	}
+	
 }
